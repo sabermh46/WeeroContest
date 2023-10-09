@@ -55,6 +55,11 @@ const locationHandler = async () => {
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, "text/html");
     const content = document.getElementById("content");
+
+    while (content.firstChild) {
+        content.removeChild(content.firstChild);
+      }
+
     content.appendChild(doc.body);
 
     document.title = route.title;
