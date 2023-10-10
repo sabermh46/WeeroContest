@@ -1,9 +1,12 @@
 class ProductComponent extends HTMLElement {
-    constructor() {
+    constructor(cart) {
       super();
+
+      this.cart = cart;
   
       // Create a shadow DOM
       this.attachShadow({ mode: 'open' });
+
   
       // Define the template
       const template = document.createElement('template');
@@ -45,13 +48,32 @@ class ProductComponent extends HTMLElement {
       // Set the product data in the component
       const productElement = this.shadowRoot.querySelector('.product');
       if (product) {
+        console.log(product.id);
         productElement.querySelector('img').src = product.imageLink;
         productElement.querySelector('img').alt = product.name;
         productElement.querySelector('h2').textContent = product.name;
         productElement.querySelector('p').textContent = product.description;
         productElement.querySelector('span').textContent = product.price.toFixed(2);
+
+        const addToCartButton = document.createElement('button');
+        addToCartButton.textContent = 'Add to Cart';
+        addToCartButton.addEventListener('click', () => this.addToCart(product));
+        productElement.appendChild(addToCartButton);
       }
     }
+
+    addToCart(product) {
+        if (product) {
+          console.log(product.id);
+          // Call the addToCart function of your cart object and pass the product's ID
+          this.cart.addToCart(product.id);
+          alert('Item added to cart.'); // You can customize this notification
+        } else {
+          console.error('Product is not defined.');
+        }
+      }
+
+
   }
   
   export default ProductComponent

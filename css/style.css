@@ -130,9 +130,7 @@ html {
     .navbar .links {
         min-width: 280px;
         height: 90vh;
-        background-color: #51411c;
-        background-image:  -o-repeating-radial-gradient( 0 0, circle, transparent 0, #51411c 17px ), -o-repeating-linear-gradient( #ff903555, #ff9035 );
-        background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #51411c 17px ), repeating-linear-gradient( #ff903555, #ff9035 );
+        background-color: #fff5de;
         border-radius: 7px;
         border: 1px solid #999999;
         position: fixed;
