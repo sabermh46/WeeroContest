@@ -12,49 +12,7 @@ var nav = document.querySelector('.nav')
 
 
 
-document.addEventListener("DOMContentLoaded", ()=>{
 
-    updateNavbarPadding()
-
-
-
-    if(window.scrollY < 300) {
-        navbar.classList.remove('shadow')
-        navbar.style.background = `rgb190, 190, 190, 0)`
-    } else if(window.scrollY >= 400) {
-        navbar.classList.add('shadow')
-        navbar.style.background = `rgb190, 190, 190, 0.5)`
-    }
-
-    console.log(products);
-
-
-    customElements.define('product-card', ProductComponent);
-    customElements.define('cart-button', CartButtonComponent);
-
-
-
-
-
-    function createProductElement(product) {
-      const productElement = document.createElement('product-card');
-      productElement.product = product;
-      productElement.cart = cart;
-      return productElement;
-    }
-
-    // Get the container element where products will be displayed
-    const container = document.getElementById('product-container');
-
-    // Loop through the products and append them to the container
-    products.forEach((product) => {
-      const productElement = createProductElement(product);
-      container.appendChild(productElement);
-    });
-
-
-
-})
 
 
 
@@ -187,6 +145,9 @@ const cart = {
   getTotalItemCount() {
     return this.items.reduce((total, item) => total + item.quantity, 0);
   },
+  isProductInCart(productId) {
+    return this.items.some((item) => item.productId === productId);
+  },
 
   // Function to save the cart to localStorage
   saveCart() {
@@ -203,6 +164,8 @@ const cart = {
 };
 
 cart.loadCart();
+
+
 
 function handleStorageChange(event) {
   if (event.key === 'cart') {
@@ -228,6 +191,9 @@ cart.onCartChange = updateTotalItemCount;
 
 // When the page loads, update the total item count initially
 updateTotalItemCount();
+
+
+
 
 
 // const loader = document.getElementById('loader');
@@ -281,4 +247,48 @@ var fromDownToTop_s = document.querySelectorAll('.fromDownToTop')
 
 fromDownToTop_s.forEach(item=>{
     new ActivateInView(item)
+})
+
+
+
+document.addEventListener("DOMContentLoaded", ()=>{
+
+  updateNavbarPadding()
+
+
+
+  if(window.scrollY < 300) {
+      navbar.classList.remove('shadow')
+      navbar.style.background = `rgb190, 190, 190, 0)`
+  } else if(window.scrollY >= 400) {
+      navbar.classList.add('shadow')
+      navbar.style.background = `rgb190, 190, 190, 0.5)`
+  }
+
+  console.log(products);
+
+
+  customElements.define('product-card', ProductComponent);
+  customElements.define('cart-button', CartButtonComponent);
+
+
+  function createProductElement(product) {
+    const productElement = document.createElement('product-card');
+    productElement.product = product;
+    productElement.cart = cart;
+    return productElement;
+  }
+  
+  // Get the container element where products will be displayed
+  const container = document.getElementById('product-container');
+  
+  // Loop through the products and append them to the container
+  products.forEach((product) => {
+    const productElement = createProductElement(product);
+    container.appendChild(productElement);
+  });
+
+
+
+  
 })

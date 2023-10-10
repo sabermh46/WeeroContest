@@ -202,8 +202,4 @@ const productList = [
     return new Product(id, name, unit, imageLink, category, price, description)
   })
 
-  products.map((p)=>{
-    console.log(p);
-  })
-
   export default products
