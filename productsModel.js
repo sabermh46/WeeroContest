@@ -203,3 +203,4 @@ const productList = [
   })
 
   export default products
+  export {Product}
