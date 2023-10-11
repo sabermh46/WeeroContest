@@ -1,3 +1,4 @@
+import products from "./productsModel.js";
 const cart = {
     items: [],
     onCartChange: null,
@@ -68,6 +69,18 @@ const cart = {
         this.items = JSON.parse(cartData);
       }
     },
+
+    getTotalPrice() {
+        let total = 0;
+        for (const item of this.items) {
+          const product = products.find((p) => p.id === item.productId);
+          if (product) {
+            total += product.price * item.quantity;
+          }
+        }
+        return total;
+      },
   };
+
 
   export default cart

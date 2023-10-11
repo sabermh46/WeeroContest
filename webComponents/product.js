@@ -5,6 +5,7 @@ class ProductComponent extends HTMLElement {
 
     // Create a shadow DOM
     this.attachShadow({ mode: 'open' });
+    
 
     // Define the template
     const template = document.createElement('template');
@@ -71,26 +72,35 @@ class ProductComponent extends HTMLElement {
     this._product = product
     const productElement = this.shadowRoot.querySelector('.product');
     if (product) {
-      console.log(product);
       productElement.querySelector('img').src = product.imageLink; // Fix this line
       productElement.querySelector('img').alt = product.name;
       productElement.querySelector('h2').textContent = product.name;
       productElement.querySelector('p').textContent = product.description;
       productElement.querySelector('span').textContent = parseFloat(product.price).toFixed(2);
-
-      // if (this.cart.isProductInCart(product.id)) {
-      //   this.showItemCounter();
-      // }
+      productElement.addEventListener('click', () => {this.navigateToProductPage()});
     }
   }
+
+  
 
   connectedCallback() {
     // Check if the product is in the cart and update the UI
     if (this._product && this.cart.isProductInCart(this._product.id)) {
       this.showItemCounter();
     }
+    
   }
+  navigateToProductPage() {
+      // Ensure the product data is available
+      if (this._product) {
+        // Construct the URL for product.html with query parameters
+        const productUrl = `product.html?productId=${this._product.id}`;
 
+        
+        // Redirect the user to the new page
+        window.location.href = productUrl;
+      }
+    }
   addToCart() {
     if (this._product) {
       this.cart.addToCart(this._product.id);

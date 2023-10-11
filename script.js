@@ -1,6 +1,7 @@
 import ProductComponent from "./webComponents/product.js";
 import products from "./productsModel.js";
 import cart from "./cart.js";
+import ProductShowModal from "./webComponents/productModal.js";
   
 
 document.addEventListener("DOMContentLoaded", ()=>{
@@ -8,15 +9,16 @@ document.addEventListener("DOMContentLoaded", ()=>{
   updateNavbarPadding()
   if(window.scrollY < 300) {
       navbar.classList.remove('shadow')
-      navbar.style.background = `rgb190, 190, 190, 0)`
+      navbar.style.background = `rgb(190, 190, 190, 0)`
   } else if(window.scrollY >= 400) {
       navbar.classList.add('shadow')
-      navbar.style.background = `rgb190, 190, 190, 0.5)`
+      navbar.style.background = `rgb(190, 190, 190, 0.5)`
   }
 
   console.log(products);
 
   customElements.define('product-card', ProductComponent);
+  customElements.define('product-show-modal', ProductShowModal);
 
   function createProductElement(cart, product) {
     const productElement = document.createElement('product-card');
@@ -29,10 +31,12 @@ document.addEventListener("DOMContentLoaded", ()=>{
   const container = document.getElementById('product-container');
   
   // Loop through the products and append them to the container
-  products.forEach((product) => {
-    const productElement = createProductElement(cart, product);
-    container.appendChild(productElement);
-  });
+  if(container){
+    products.forEach((product) => {
+      const productElement = createProductElement(cart, product);
+      container.appendChild(productElement);
+    });
+  }
   
 })
 
@@ -72,17 +76,12 @@ var nav = document.querySelector('.nav')
 
 
 
-
+console.log(cart.getTotalPrice());
 
 
 window.addEventListener('resize', ()=>{
     updateNavbarPadding()
 })
-
-
-
-
-
 
 window.addEventListener('scroll', ()=>{
 

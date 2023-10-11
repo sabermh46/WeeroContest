@@ -43,13 +43,14 @@ html {
     z-index: 999;
 }
 .navbar {
-    height: 70px;
+    height: 60px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: justify;
         -ms-flex-pack: justify;
             justify-content: space-between;
+    align-items: center;
     position: relative;
     gap: 20px;
     width: 100%;
@@ -242,6 +243,11 @@ html {
 
 
 
+
+
+.flex {
+    display: flex;
+}
 
 
 
