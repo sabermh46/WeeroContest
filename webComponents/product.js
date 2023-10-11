@@ -13,6 +13,7 @@ class ProductComponent extends HTMLElement {
       <style>
         /* Add CSS styles for the product component */
         .product {
+          cursor: pointer;
           border: 1px solid #ccc;
           padding: 10px;
           margin: 10px;
@@ -62,9 +63,21 @@ class ProductComponent extends HTMLElement {
     this.incrementButton = this.shadowRoot.querySelector('.increment');
     this.decrementButton = this.shadowRoot.querySelector('.decrement');
 
-    this.addButton.addEventListener('click', () => this.addToCart());
-    this.incrementButton.addEventListener('click', () => this.addToCart());
-    this.decrementButton.addEventListener('click', () => this.decrementItem());
+    this.addButton.addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.addToCart()
+      
+    });
+    this.incrementButton.addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.addToCart()
+      
+    });
+    this.decrementButton.addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.decrementItem()
+      
+    });
   }
 
   set product(product) { // Fix the method name here
